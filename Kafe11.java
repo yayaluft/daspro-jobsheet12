@@ -8,8 +8,11 @@ public class Kafe11 {
         int pilihanMenu = sc.nextInt();
         System.out.print("Masukkan jumlah item yang ingin dipesan: ");
         int banyakItem = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Masukan kode promo: ");
+        String promo = sc.nextLine();
 
-        int totalHarga = hitungTotalHarrga(pilihanMenu, banyakItem);
+        int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem, promo);
 
         System.out.println("Total harga untuk pesanan Anda: Rp" + totalHarga);
     }
@@ -40,10 +43,24 @@ public class Kafe11 {
         System.out.println("Silakan pilih menu yang Anda inginkan.");
     }
 
-    public static int hitungTotalHarrga(int pilihanMenu, int banyakItem) {
+    public static int hitungTotalHarga(int pilihanMenu, int banyakItem, String kodePromo) {
         int[] hargaItems = { 15000, 20000, 22000, 12000, 10000, 18000 };
 
         int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
+
+        switch (kodePromo) {
+            case "DISKON50":
+                System.out.println("Anda mendapatkan diskon 50%");
+                hargaTotal = hargaTotal - (hargaTotal * 50 / 100);
+                break;
+            case "DISKON30":
+                System.out.println("Anda mendapatkan diskon 30%");
+                hargaTotal = hargaTotal - (hargaTotal * 30 / 100);
+                break;
+            default:
+                System.out.println("Kode promo invalid.");
+                break;
+        }
         return hargaTotal;
     }
 }
