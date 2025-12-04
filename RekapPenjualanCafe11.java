@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class RekapPenjualanCafe11 {
-    static String[] menu = { "Kopi", "Teh", "Es Kelapa Muda", "Roti Bakar", "Gorengan" };
-
+    static String[] menu;
+    static int jmlHari;
     public static void main(String[] args) {
         int[][] data = inputData();
         System.out.println();
@@ -18,7 +18,20 @@ public class RekapPenjualanCafe11 {
 
     static int[][] inputData() {
         Scanner sc = new Scanner(System.in);
-        int[][] data = new int[menu.length][7];
+        System.out.print("Masukkan jumlah menu: ");
+        int jmlMenu = sc.nextInt();
+        System.out.print("Masukkan jumlah hari penjualan: ");
+        jmlHari = sc.nextInt();
+        sc.nextLine();
+
+        menu = new String[jmlMenu];
+        System.out.println("--JENIS MENU--");
+        for (int i =0; i < menu.length; i++) {
+            System.out.print("Nama menu ke-"+(i+1)+": ");
+            menu[i]= sc.nextLine();
+        }
+
+        int[][] data = new int[jmlMenu][jmlHari];
 
         System.out.println("--INPUT DATA PENJUALAN--");
         for (int i = 0; i < data.length; i++) {
@@ -35,7 +48,11 @@ public class RekapPenjualanCafe11 {
 
     static void tampilData(int[][] data) {
         System.out.println("---TABEL DATA PENJUALAN---");
-        System.out.println("Menu\t\tH1\tH2\tH3\tH4\tH5\tH6\tH7");
+        System.out.printf("%-15s","Menu");
+        for (int n = 1; n <= jmlHari; n++){
+            System.out.printf("H%-6d",n);
+        }
+        System.out.println();
 
         for (int i = 0; i < data.length; i++) {
             System.out.printf("%-15s", menu[i]);
